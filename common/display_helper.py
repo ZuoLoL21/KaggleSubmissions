@@ -42,16 +42,18 @@ def display_2d_hyperparameter_grid_search(hyperparameter_1: list,
 									  usecolormap=True,
 									  highlightcolor="limegreen",
 									  project_z=True))
-	fig.update_layout(title=dict(text='Hyperparameter tuning graph'),
-					  autosize=False,
-					  scene_camera_eye=dict(x=1.87, y=0.88, z=-0.64),
-					  width=500, height=500,
-					  margin=dict(l=65, r=50, b=65, t=90),
-					  scene=dict(
-							  xaxis_title=names[1],
-							  yaxis_title=names[0],
-							  zaxis_title="Accuracy"
-					  ),
-					  )
+	fig.update_layout(title=dict(
+			text='Hyperparameter tuning graph'),
+			autosize=False,
+			scene_camera_eye=dict(x=1.87, y=0.88, z=-0.64),
+			width=500, height=500,
+			margin=dict(l=65, r=50, b=65, t=90),
+			scene=dict(
+					xaxis_title=names[1],
+					yaxis_title=names[0],
+					zaxis_title="Accuracy"
+			),
+			template="plotly_dark"
+	)
 
 	fig.show()

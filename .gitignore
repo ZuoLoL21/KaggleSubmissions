@@ -1,6 +1,9 @@
-.ipynb_checkpoints
 .pkl
 .env
-
 .csv
-.txt
+
+.ipynb_checkpoints
+
+**/inputs/
+
+random/

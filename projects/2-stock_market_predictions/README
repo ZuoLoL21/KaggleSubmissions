@@ -1,0 +1,4 @@
+Download the data from https://www.kaggle.com/datasets/borismarjanovic/price-volume-data-for-all-us-stocks-etfs
+and choose the hpq.us.txt file
+
+Put downloaded file into inputs/

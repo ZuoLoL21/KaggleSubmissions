@@ -3,10 +3,10 @@
   <component name="NewModuleRootManager">
     <content url="file://$MODULE_DIR$">
       <excludeFolder url="file://$MODULE_DIR$/projects/1-titanic_survivors/.ipynb_checkpoints" />
-      <excludeFolder url="file://$MODULE_DIR$/projects/2-stock_market_predictions/inputs" />
       <excludeFolder url="file://$MODULE_DIR$/projects/3-digit_recognizer/inputs" />
       <excludeFolder url="file://$MODULE_DIR$/projects/1-titanic_survivors/inputs" />
       <excludeFolder url="file://$MODULE_DIR$/random" />
+      <excludeFolder url="file://$MODULE_DIR$/projects/2-stock_market_predictions_lstm_tutorial/inputs" />
     </content>
     <orderEntry type="jdk" jdkName="tensor_data_science" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />

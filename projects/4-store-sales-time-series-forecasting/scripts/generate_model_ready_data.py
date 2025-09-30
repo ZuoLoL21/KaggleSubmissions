@@ -14,25 +14,56 @@ HOLIDAY_DATA = pd.read_csv(os.path.join(TRANSFORMED_DATA_DIRECTORY, 'holidays_ev
 UNIQUE_STORE_NUMBERS = 54
 
 
-def _is_holiday(date, city, state):
-    entries = HOLIDAY_DATA.loc[HOLIDAY_DATA["date"] == date]
+def _create_dict_for_holiday():
+    holiday_dict = {}
 
+    for index, row in HOLIDAY_DATA.iterrows():
+        obj_to_add = {
+            "type": row['type'],
+            "locale": row['locale'],
+            "locale_name": row['locale_name'],
+        }
+        if holiday_dict.get(row["date"]) is None:
+            holiday_dict[row["date"]] = [obj_to_add]
+        else:
+            holiday_dict[row["date"]].append(obj_to_add)
+    return holiday_dict
+
+
+def _is_holiday(date, city, state, holiday_dict=None):
     returns = []
-    for index, entry in entries.iterrows():
+
+    def _process_entry(entry):
         if entry["locale"] == "National":
             returns.append(entry["type"])
         elif entry["locale"] == "Regional":
             if entry["locale_name"] == state:
                 returns.append(entry["type"])
-            continue
+            return
         elif entry["locale"] == "Local":
             if entry["locale_name"] == city:
                 returns.append(entry["type"])
-            continue
+            return
         else:
             raise RuntimeError("Locale not handled")
 
-    return returns
+    if holiday_dict is None:
+        entries = HOLIDAY_DATA.loc[HOLIDAY_DATA["date"] == date]
+
+        for index, entry in entries.iterrows():
+            _process_entry(entry)
+
+        return returns
+
+    else:
+        output = holiday_dict.get(date)
+        if output is None:
+            return returns
+
+        for entry in output:
+            _process_entry(entry)
+
+        return returns
 
 
 def _left_join(df1, df2, axis_name: Iterable[str] = 'index'):
@@ -51,9 +82,14 @@ def add_transaction_data(train_df, transaction_df):
     return _left_join(train_df, transaction_df, axis_name=('date', 'store_nbr'))
 
 
-def add_holiday_information(input_filename):
-    write_files = [open(os.path.join(TRANSFORMED_2_DATA_DIRECTORY, f"{i}.csv"), 'w', newline='') for i in
-                   range(UNIQUE_STORE_NUMBERS)]
+def add_holiday_information_split(input_filename, holiday_dict=None, preface="default"):
+    if not preface:
+        raise RuntimeError("Preface must be specified")
+
+    write_files = [
+        open(os.path.join(TRANSFORMED_2_DATA_DIRECTORY, preface, f"{i}.csv"), 'w', newline='')
+        for i in
+        range(UNIQUE_STORE_NUMBERS)]
     with (
         open(os.path.join(TRANSFORMED_DATA_DIRECTORY, input_filename), 'r', newline='') as f,
     ):
@@ -85,9 +121,8 @@ def add_holiday_information(input_filename):
         for writer in writers:
             writer.writerow(header_line)
 
-        print(len(writers))
         for line in tqdm(reader):
-            to_add = transform(_is_holiday(line[date_index], line[city_index], line[state_index]))
+            to_add = transform(_is_holiday(line[date_index], line[city_index], line[state_index], holiday_dict))
             line.extend(to_add)
 
             writers[int(line[store_index]) - 1].writerow(line)
@@ -101,25 +136,29 @@ def write_to_file(df, name):
     df.to_csv(os.path.join(TRANSFORMED_DATA_DIRECTORY, name))
 
 
-def main():
-    # oil_df = pd.read_csv(os.path.join(TRANSFORMED_DATA_DIRECTORY, "oil.csv"), delimiter=",")
-    # stores_df = pd.read_csv(os.path.join(TRANSFORMED_DATA_DIRECTORY, "stores.csv"),
-    #                         delimiter=",").set_index("store_nbr")
-    # transactions_df = pd.read_csv(os.path.join(TRANSFORMED_DATA_DIRECTORY, "transactions.csv"), delimiter=",")
-    # train_df = pd.read_csv(os.path.join(TRANSFORMED_DATA_DIRECTORY, "train.csv"), delimiter=",").set_index("id")
-    # print("Starting process ", train_df.shape)
-    #
-    # train_df = add_oil_data(train_df, oil_df)
-    # print("Added oil data ", train_df.shape)
-    #
-    # train_df = add_store_data(train_df, stores_df)
-    # print("Added store data ", train_df.shape)
-    #
-    # train_df = add_transaction_data(train_df, transactions_df)
-    # print("Added transaction data ", train_df.shape)
-    # write_to_file(train_df, "train_df_added.csv")
+FILE_TO_PROCESS = "test.csv"
 
-    add_holiday_information("train_df_added.csv")
+
+def main():
+    oil_df = pd.read_csv(os.path.join(TRANSFORMED_DATA_DIRECTORY, "oil.csv"), delimiter=",")
+    stores_df = pd.read_csv(os.path.join(TRANSFORMED_DATA_DIRECTORY, "stores.csv"),
+                            delimiter=",").set_index("store_nbr")
+    transactions_df = pd.read_csv(os.path.join(TRANSFORMED_DATA_DIRECTORY, "transactions.csv"), delimiter=",")
+    train_df = pd.read_csv(os.path.join(TRANSFORMED_DATA_DIRECTORY, FILE_TO_PROCESS), delimiter=",").set_index("id")
+    print("Starting process ", train_df.shape)
+
+    train_df = add_oil_data(train_df, oil_df)
+    print("Added oil data ", train_df.shape)
+
+    train_df = add_store_data(train_df, stores_df)
+    print("Added store data ", train_df.shape)
+
+    train_df = add_transaction_data(train_df, transactions_df)
+    print("Added transaction data ", train_df.shape)
+    write_to_file(train_df, "train_df_added.csv")
+
+    holiday = _create_dict_for_holiday()
+    add_holiday_information_split("train_df_added.csv", holiday_dict=holiday, preface=FILE_TO_PROCESS.split(".")[0])
 
 
 if __name__ == "__main__":

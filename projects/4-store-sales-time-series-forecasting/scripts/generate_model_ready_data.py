@@ -88,8 +88,8 @@ def add_holiday_information_split(input_filename, holiday_dict=None, preface="de
 
     write_files = [
         open(os.path.join(TRANSFORMED_2_DATA_DIRECTORY, preface, f"{i}.csv"), 'w', newline='')
-        for i in
-        range(UNIQUE_STORE_NUMBERS)]
+        for i in range(UNIQUE_STORE_NUMBERS)]
+
     with (
         open(os.path.join(TRANSFORMED_DATA_DIRECTORY, input_filename), 'r', newline='') as f,
     ):
@@ -136,29 +136,32 @@ def write_to_file(df, name):
     df.to_csv(os.path.join(TRANSFORMED_DATA_DIRECTORY, name))
 
 
-FILE_TO_PROCESS = "test.csv"
+FILES_TO_PROCESS = ["train.csv", "test.csv"]
 
 
 def main():
-    oil_df = pd.read_csv(os.path.join(TRANSFORMED_DATA_DIRECTORY, "oil.csv"), delimiter=",")
-    stores_df = pd.read_csv(os.path.join(TRANSFORMED_DATA_DIRECTORY, "stores.csv"),
-                            delimiter=",").set_index("store_nbr")
-    transactions_df = pd.read_csv(os.path.join(TRANSFORMED_DATA_DIRECTORY, "transactions.csv"), delimiter=",")
-    train_df = pd.read_csv(os.path.join(TRANSFORMED_DATA_DIRECTORY, FILE_TO_PROCESS), delimiter=",").set_index("id")
-    print("Starting process ", train_df.shape)
+    for f in FILES_TO_PROCESS:
+        train_df = pd.read_csv(os.path.join(TRANSFORMED_DATA_DIRECTORY, f), delimiter=",")
+        print("Starting process ", train_df.shape)
 
-    train_df = add_oil_data(train_df, oil_df)
-    print("Added oil data ", train_df.shape)
+        oil_df = pd.read_csv(os.path.join(TRANSFORMED_DATA_DIRECTORY, "oil.csv"), delimiter=",")
+        train_df = add_oil_data(train_df, oil_df)
+        print("Added oil data ", train_df.shape)
 
-    train_df = add_store_data(train_df, stores_df)
-    print("Added store data ", train_df.shape)
+        stores_df = pd.read_csv(os.path.join(TRANSFORMED_DATA_DIRECTORY, "stores.csv"),
+                                delimiter=",").set_index("store_nbr")
+        train_df = add_store_data(train_df, stores_df)
+        train_df.set_index("date", inplace=True)
+        print("Added store data ", train_df.shape)
 
-    train_df = add_transaction_data(train_df, transactions_df)
-    print("Added transaction data ", train_df.shape)
-    write_to_file(train_df, "train_df_added.csv")
+        # transactions_df = pd.read_csv(os.path.join(TRANSFORMED_DATA_DIRECTORY, "transactions.csv"), delimiter=",")
+        # train_df = add_transaction_data(train_df, transactions_df)
+        # print("Added transaction data ", train_df.shape)
 
-    holiday = _create_dict_for_holiday()
-    add_holiday_information_split("train_df_added.csv", holiday_dict=holiday, preface=FILE_TO_PROCESS.split(".")[0])
+        write_to_file(train_df, f"{f}_added.csv")
+
+        holiday = _create_dict_for_holiday()
+        add_holiday_information_split(f"{f}_added.csv", holiday_dict=holiday, preface=f.split(".")[0])
 
 
 if __name__ == "__main__":

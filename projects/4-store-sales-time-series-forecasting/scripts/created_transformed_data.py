@@ -8,8 +8,10 @@ TRANSFORMED_DATA_DIRECTORY = os.path.normpath(os.path.join(os.getcwd(), '..', 'i
 
 OIL_FILE_NAME = 'oil.csv'
 HOLIDAY_FILE_NAME = 'holidays_events.csv'
+TRAIN_FILE = "train.csv"
+TEST_FILE = "test.csv"
 
-OTHER_RAWS = ["stores.csv", "transactions.csv", "train.csv", "test.csv"]
+OTHER_RAWS = ["stores.csv", "transactions.csv"]
 
 
 def treat_oil_data():
@@ -39,6 +41,26 @@ def treat_holiday_data():
     holiday_events_df_t.to_csv(os.path.join(TRANSFORMED_DATA_DIRECTORY, HOLIDAY_FILE_NAME))
 
 
+COLUMNS_TO_KEEP = ['date', 'store_nbr']
+COLUMN_TO_MODIFY = 'family'
+COLUMN_TO_TEST = 'sales'
+
+
+def treat_train_data():
+    train_df = pd.read_csv(os.path.join(RAW_DATA_DIRECTORY, TRAIN_FILE), delimiter=",")
+    df_pivot = train_df.pivot(index=COLUMNS_TO_KEEP, columns=COLUMN_TO_MODIFY, values=COLUMN_TO_TEST)
+
+    df_pivot.to_csv(os.path.join(TRANSFORMED_DATA_DIRECTORY, TRAIN_FILE))
+
+
+def treat_test_data():
+    test_df = pd.read_csv(os.path.join(RAW_DATA_DIRECTORY, TEST_FILE), delimiter=",")
+    unique_pairs = test_df[COLUMNS_TO_KEEP].drop_duplicates().reset_index(drop=True)
+    unique_pairs.set_index('date', inplace=True)
+
+    unique_pairs.to_csv(os.path.join(TRANSFORMED_DATA_DIRECTORY, TEST_FILE))
+
+
 def copy_file(source, destination):
     shutil.copy(source, destination)
 
@@ -46,6 +68,8 @@ def copy_file(source, destination):
 def main():
     treat_oil_data()
     treat_holiday_data()
+    treat_train_data()
+    treat_test_data()
 
     for file_name in OTHER_RAWS:
         copy_file(

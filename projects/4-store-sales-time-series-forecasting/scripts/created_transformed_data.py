@@ -3,19 +3,22 @@ import pandas as pd
 import numpy as np
 import shutil
 
+from common.libs.PandasHelper import one_hot_encode
+
 RAW_DATA_DIRECTORY = os.path.normpath(os.path.join(os.getcwd(), '..', 'inputs', 'raw'))
 TRANSFORMED_DATA_DIRECTORY = os.path.normpath(os.path.join(os.getcwd(), '..', 'inputs', 'transformed'))
 
-OIL_FILE_NAME = 'oil.csv'
-HOLIDAY_FILE_NAME = 'holidays_events.csv'
+OIL_FILE = 'oil.csv'
+HOLIDAY_FILE = 'holidays_events.csv'
 TRAIN_FILE = "train.csv"
 TEST_FILE = "test.csv"
+STORES_FILE = "stores.csv"
 
-OTHER_RAWS = ["stores.csv", "transactions.csv"]
+OTHER_RAWS = ["transactions.csv"]
 
 
 def treat_oil_data():
-    oil_df = pd.read_csv(os.path.join(RAW_DATA_DIRECTORY, OIL_FILE_NAME), delimiter=",")
+    oil_df = pd.read_csv(os.path.join(RAW_DATA_DIRECTORY, OIL_FILE), delimiter=",")
 
     oil_df['date'] = pd.to_datetime(oil_df['date'])
     oil_df_t = oil_df.set_index('date').asfreq('D')
@@ -29,16 +32,25 @@ def treat_oil_data():
 
     oil_df_t["dcoilwtico"] = data
 
-    oil_df_t.to_csv(os.path.join(TRANSFORMED_DATA_DIRECTORY, OIL_FILE_NAME))
+    oil_df_t.to_csv(os.path.join(TRANSFORMED_DATA_DIRECTORY, OIL_FILE))
 
 
 def treat_holiday_data():
-    holiday_events_df = pd.read_csv(os.path.join(RAW_DATA_DIRECTORY, HOLIDAY_FILE_NAME), delimiter=",")
+    holiday_events_df = pd.read_csv(os.path.join(RAW_DATA_DIRECTORY, HOLIDAY_FILE), delimiter=",")
 
     holiday_events_df_t = holiday_events_df.loc[holiday_events_df["type"] != "Transfer"].copy()
     holiday_events_df_t.drop(["transferred", "description"], axis=1, inplace=True)
 
-    holiday_events_df_t.to_csv(os.path.join(TRANSFORMED_DATA_DIRECTORY, HOLIDAY_FILE_NAME))
+    holiday_events_df_t.to_csv(os.path.join(TRANSFORMED_DATA_DIRECTORY, HOLIDAY_FILE))
+
+
+def treat_stores_data():
+    stores_df = pd.read_csv(os.path.join(RAW_DATA_DIRECTORY, STORES_FILE), delimiter=",")
+    stores_df.set_index('store_nbr', inplace=True)
+
+    stores_df = one_hot_encode(stores_df, ["type"])
+
+    stores_df.to_csv(os.path.join(TRANSFORMED_DATA_DIRECTORY, STORES_FILE))
 
 
 COLUMNS_TO_KEEP = ['date', 'store_nbr']
@@ -70,6 +82,7 @@ def main():
     treat_holiday_data()
     treat_train_data()
     treat_test_data()
+    treat_stores_data()
 
     for file_name in OTHER_RAWS:
         copy_file(

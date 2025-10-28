@@ -70,6 +70,10 @@ def _left_join(df1, df2, axis_name: Iterable[str] = 'index'):
     return df1.merge(df2, on=axis_name, how='left')
 
 
+def _left_join_insert_left(df1, df2, axis_name: Iterable[str] = 'index'):
+    return df2.merge(df1, on=axis_name, how='right')
+
+
 def add_oil_data(train_df, oil_df):
     return _left_join(train_df, oil_df, axis_name='date')
 

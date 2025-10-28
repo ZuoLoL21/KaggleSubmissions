@@ -5,6 +5,8 @@ import numpy as np
 class SeqDataGeneratorList:
     """Generates timeseries data from a list of shape [data][C...]
 
+    Transforms a List of shape (x) to (batch_size, numb_unrollings, 1)
+
     num_unroll: the number of timeframes to return
     """
 
@@ -57,8 +59,8 @@ class SeqDataGeneratorList:
 def main():
     data_generator = SeqDataGeneratorList(np.array([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], dtype=float), 10, 5)
     inputs, outputs = data_generator.unroll_batches()
-    inputs = tf.squeeze(inputs)
-    outputs = tf.squeeze(outputs)
+    # inputs = tf.squeeze(inputs)
+    # outputs = tf.squeeze(outputs)
     print(inputs, outputs)
 
 

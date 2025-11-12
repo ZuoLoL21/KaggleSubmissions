@@ -12,7 +12,7 @@ class SeqDataGeneratorXY:
     num_unroll: the number of timeframes to return
     """
 
-    def __init__(self, xs, ys, batch_size, num_unroll):
+    def __init__(self, xs, ys, batch_size, num_unroll, seed=None):
         if len(xs) != len(ys):
             raise UserWarning('xs and ys must have same length')
 
@@ -21,6 +21,10 @@ class SeqDataGeneratorXY:
         self._xs_length = len(self._xs)
         self._batch_size = batch_size
         self._num_unroll = num_unroll
+
+        if seed is not None:
+            np.random.seed(seed)
+
         self._reset_indices()
 
     def _next_batch(self):
@@ -74,11 +78,25 @@ def main():
             np.array([1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
                      dtype=float),
             10,
-            5)
+            5,
+            seed=42)
     inputs, outputs = data_generator.unroll_batches()
     # inputs = tf.squeeze(inputs)
     # outputs = tf.squeeze(outputs)
     print(inputs, outputs)
+
+    data_generator = SeqDataGeneratorXY(
+            np.repeat(
+                    np.array([1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+                             dtype=float)
+                    , 2).reshape(-1, 2),
+            np.array([1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+                     dtype=float),
+            10,
+            5,
+            seed=42)
+    inputs2, outputs2 = data_generator.unroll_batches()
+    print("Reproducable?: ", np.array_equal(inputs2, inputs) and np.array_equal(outputs2, outputs))
 
 
 if __name__ == '__main__':

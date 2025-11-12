@@ -22,8 +22,7 @@ class SeqDataGeneratorXY:
         self._batch_size = batch_size
         self._num_unroll = num_unroll
 
-        if seed is not None:
-            np.random.seed(seed)
+        self._rng = np.random.default_rng(seed)
 
         self._reset_indices()
 
@@ -55,7 +54,7 @@ class SeqDataGeneratorXY:
         return unroll_data, unroll_labels
 
     def _reset_indices(self):
-        self._cursor = np.random.randint(0, self._xs_length - self._num_unroll, self._batch_size)
+        self._cursor = self._rng.integers(0, self._xs_length - self._num_unroll, self._batch_size)
 
     def as_generator(self, epochs=None):
         def generator():

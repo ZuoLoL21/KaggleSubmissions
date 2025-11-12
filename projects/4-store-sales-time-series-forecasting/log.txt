@@ -1,0 +1,312 @@
+Shape LSTM: (200, 200)
+Dense: (50,)
+Epochs: 250
+    Validation loss: 3.9008970260620117, 250
+    Training loss: 0.9201701283454895, 250
+-----------
+Shape LSTM: (200, 200)
+Dense: (75,)
+Epochs: 250
+    Validation loss: 7.205596923828125, 250
+    Training loss: 3.960571050643921, 250
+-----------
+Shape LSTM: (200, 200)
+Dense: (50, 50)
+Epochs: 250
+    Validation loss: 5.0877604484558105, 250
+    Training loss: 2.1899681091308594, 250
+-----------
+Shape LSTM: (200, 200)
+Dense: (50, 50, 50)
+Epochs: 250
+    Validation loss: 6.575512886047363, 250
+    Training loss: 3.2519659996032715, 250
+-----------
+Shape LSTM: (100, 150, 150)
+Dense: (50,)
+Epochs: 250
+    Validation loss: 7.356656074523926, 250
+    Training loss: 4.127988338470459, 250
+-----------
+Shape LSTM: (100, 150, 150)
+Dense: (75,)
+Epochs: 250
+    Validation loss: 6.822768688201904, 250
+    Training loss: 3.4755234718322754, 250
+-----------
+Shape LSTM: (100, 150, 150)
+Dense: (50, 50)
+Epochs: 250
+    Validation loss: 5.65390157699585, 250
+    Training loss: 2.6874098777770996, 250
+-----------
+Shape LSTM: (100, 150, 150)
+Dense: (50, 50, 50)
+Epochs: 250
+    Validation loss: 8.418947219848633, 250
+    Training loss: 5.00409460067749, 250
+-----------
+Shape LSTM: (70, 100, 100, 150)
+Dense: (50,)
+Epochs: 250
+    Validation loss: 5.070059299468994, 250
+    Training loss: 1.9132357835769653, 250
+-----------
+Shape LSTM: (70, 100, 100, 150)
+Dense: (75,)
+Epochs: 250
+    Validation loss: 6.6418280601501465, 250
+    Training loss: 3.320467948913574, 250
+-----------
+Shape LSTM: (70, 100, 100, 150)
+Dense: (50, 50)
+Epochs: 250
+    Validation loss: 4.224130630493164, 250
+    Training loss: 1.3988656997680664, 250
+-----------
+Shape LSTM: (70, 100, 100, 150)
+Dense: (50, 50, 50)
+Epochs: 250
+    Validation loss: 5.67918586730957, 250
+    Training loss: 2.272864580154419, 250
+-----------
+Shape LSTM: (60, 80, 100, 120, 100)
+Dense: (50,)
+Epochs: 250
+    Validation loss: 4.1989359855651855, 250
+    Training loss: 1.1720033884048462, 250
+-----------
+Shape LSTM: (60, 80, 100, 120, 100)
+Dense: (75,)
+Epochs: 250
+    Validation loss: 5.914216995239258, 250
+    Training loss: 2.815424919128418, 250
+-----------
+Shape LSTM: (60, 80, 100, 120, 100)
+Dense: (50, 50)
+Epochs: 250
+    Validation loss: 6.127187728881836, 250
+    Training loss: 3.196650743484497, 250
+-----------
+Shape LSTM: (60, 80, 100, 120, 100)
+Dense: (50, 50, 50)
+Epochs: 250
+    Validation loss: 8.070988655090332, 250
+    Training loss: 4.537631988525391, 250
+-----------
+Shape LSTM: (60, 70, 80, 100, 100, 80)
+Dense: (50,)
+Epochs: 250
+    Validation loss: 6.100426197052002, 250
+    Training loss: 2.8877737522125244, 250
+-----------
+Shape LSTM: (60, 70, 80, 100, 100, 80)
+Dense: (75,)
+Epochs: 250
+    Validation loss: 8.208106994628906, 250
+    Training loss: 4.922399044036865, 250
+-----------
+Shape LSTM: (60, 70, 80, 100, 100, 80)
+Dense: (50, 50)
+Epochs: 250
+    Validation loss: 6.547685146331787, 250
+    Training loss: 3.1486754417419434, 250
+-----------
+Shape LSTM: (60, 70, 80, 100, 100, 80)
+Dense: (50, 50, 50)
+Epochs: 250
+    Validation loss: 5.79976749420166, 250
+    Training loss: 2.7958197593688965, 250
+-----------
+Shape LSTM: (200, 200)
+Dense: (30,)
+Epochs: 250
+    Validation loss: 6.948182582855225, 250
+    Training loss: 3.68497896194458, 250
+-----------
+Shape LSTM: (200, 200)
+Dense: (50,)
+Epochs: 250
+    Validation loss: 6.515946865081787, 250
+    Training loss: 3.4635019302368164, 250
+-----------
+Shape LSTM: (200, 200)
+Dense: (75,)
+Epochs: 250
+    Validation loss: 4.517660617828369, 250
+    Training loss: 1.5073825120925903, 250
+-----------
+Shape LSTM: (200, 200)
+Dense: (30, 30)
+Epochs: 250
+    Validation loss: 6.431439399719238, 250
+    Training loss: 2.9864683151245117, 250
+-----------
+Shape LSTM: (100, 150, 150)
+Dense: (30,)
+Epochs: 250
+    Validation loss: 5.7147345542907715, 250
+    Training loss: 2.700564384460449, 250
+-----------
+Shape LSTM: (100, 150, 150)
+Dense: (50,)
+Epochs: 250
+    Validation loss: 7.002687454223633, 250
+    Training loss: 3.578223943710327, 250
+-----------
+Shape LSTM: (100, 150, 150)
+Dense: (75,)
+Epochs: 250
+    Validation loss: 5.072353839874268, 250
+    Training loss: 2.060518264770508, 250
+-----------
+Shape LSTM: (100, 150, 150)
+Dense: (30, 30)
+Epochs: 250
+    Validation loss: 7.917752265930176, 250
+    Training loss: 4.78108024597168, 250
+-----------
+Shape LSTM: (150, 150, 100)
+Dense: (30,)
+Epochs: 250
+    Validation loss: 6.467638969421387, 250
+    Training loss: 3.0329065322875977, 250
+-----------
+Shape LSTM: (150, 150, 100)
+Dense: (50,)
+Epochs: 250
+    Validation loss: 6.67855978012085, 250
+    Training loss: 3.093843460083008, 250
+-----------
+Shape LSTM: (150, 150, 100)
+Dense: (75,)
+Epochs: 250
+    Validation loss: 5.464317798614502, 250
+    Training loss: 2.405426263809204, 250
+-----------
+Shape LSTM: (150, 150, 100)
+Dense: (30, 30)
+Epochs: 250
+    Validation loss: 7.567070960998535, 250
+    Training loss: 4.671031951904297, 250
+-----------
+Shape LSTM: (150, 100, 150)
+Dense: (30,)
+Epochs: 250
+    Validation loss: 9.060304641723633, 250
+    Training loss: 5.222009658813477, 250
+-----------
+Shape LSTM: (150, 100, 150)
+Dense: (50,)
+Epochs: 250
+    Validation loss: 7.567419052124023, 250
+    Training loss: 4.293166637420654, 250
+-----------
+Shape LSTM: (150, 100, 150)
+Dense: (75,)
+Epochs: 250
+    Validation loss: 6.979539394378662, 250
+    Training loss: 3.6152045726776123, 250
+-----------
+Shape LSTM: (150, 100, 150)
+Dense: (30, 30)
+Epochs: 250
+    Validation loss: 6.382186412811279, 250
+    Training loss: 2.8557469844818115, 250
+-----------
+Shape LSTM: (150, 200)
+Dense: (30,)
+Epochs: 250
+    Validation loss: 6.602215766906738, 250
+    Training loss: 3.0336852073669434, 250
+-----------
+Shape LSTM: (150, 200)
+Dense: (50,)
+Epochs: 250
+    Validation loss: 5.193216323852539, 250
+    Training loss: 2.0626068115234375, 250
+-----------
+Shape LSTM: (150, 200)
+Dense: (75,)
+Epochs: 250
+    Validation loss: 4.551318645477295, 250
+    Training loss: 1.561307668685913, 250
+-----------
+Shape LSTM: (150, 200)
+Dense: (30, 30)
+Epochs: 250
+    Validation loss: 6.40352725982666, 250
+    Training loss: 3.2419769763946533, 250
+-----------
+Shape LSTM: (200, 150)
+Dense: (30,)
+Epochs: 250
+    Validation loss: 7.338261127471924, 250
+    Training loss: 4.0621771812438965, 250
+-----------
+Shape LSTM: (200, 150)
+Dense: (50,)
+Epochs: 250
+    Validation loss: 7.822617053985596, 250
+    Training loss: 4.260634899139404, 250
+-----------
+Shape LSTM: (200, 150)
+Dense: (75,)
+Epochs: 250
+    Validation loss: 6.338399887084961, 250
+    Training loss: 3.2857353687286377, 250
+-----------
+Shape LSTM: (200, 150)
+Dense: (30, 30)
+Epochs: 250
+    Validation loss: 8.034049987792969, 250
+    Training loss: 4.7458271980285645, 250
+-----------
+Shape LSTM: (100, 100)
+Dense: (30,)
+Epochs: 250
+    Validation loss: 7.326668739318848, 250
+    Training loss: 4.1200642585754395, 250
+-----------
+Shape LSTM: (100, 100)
+Dense: (50,)
+Epochs: 250
+    Validation loss: 7.2518134117126465, 250
+    Training loss: 4.148146152496338, 250
+-----------
+Shape LSTM: (100, 100)
+Dense: (75,)
+Epochs: 250
+    Validation loss: 7.053003311157227, 250
+    Training loss: 3.659611701965332, 250
+-----------
+Shape LSTM: (100, 100)
+Dense: (30, 30)
+Epochs: 250
+    Validation loss: 10.501708984375, 250
+    Training loss: 6.8755998611450195, 250
+-----------
+Shape LSTM: (200, 200, 200)
+Dense: (30,)
+Epochs: 250
+    Validation loss: 7.211077690124512, 250
+    Training loss: 4.036607265472412, 250
+-----------
+Shape LSTM: (200, 200, 200)
+Dense: (50,)
+Epochs: 250
+    Validation loss: 5.864701747894287, 250
+    Training loss: 2.738854169845581, 250
+-----------
+Shape LSTM: (200, 200, 200)
+Dense: (75,)
+Epochs: 250
+    Validation loss: 6.881724834442139, 250
+    Training loss: 3.7603418827056885, 250
+-----------
+Shape LSTM: (200, 200, 200)
+Dense: (30, 30)
+Epochs: 250
+    Validation loss: 4.965952396392822, 250
+    Training loss: 2.171408176422119, 250
+-----------
